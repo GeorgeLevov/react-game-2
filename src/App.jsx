@@ -19,18 +19,19 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Game Title</h1>
+            <h1>Speed Typer</h1>
             <textarea
-            // value=""
-            // placeholder=""
-            // onChange={}
-            // name=""
+                className="typer-input"
+                // value=""
+                // placeholder=""
+                // onChange={}
+                // name=""
             />
 
             <h4>Time Remaining: </h4>
             <button>Start Game</button>
 
-            <h1>Word Count</h1>
+            <h1>Word Count: </h1>
         </div>
     );
 }

@@ -1,0 +1,50 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    padding: 32px;
+}
+
+h1 {
+    font-family: var(--ff-title-text);
+    font-size: 3.675rem;
+}
+
+h4 {
+    font-size: 1.675rem;
+}
+
+textarea {
+    outline: none;
+    border: 2px solid #000;
+    resize: none;
+    margin: 0px auto;
+    width: 100%;
+    height: 400px;
+    background: hsl(305, 100%, 40%);
+    padding: 16px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+textarea .typer-input {
+    margin: 16px auto;
+    margin-top: 32px;
+}
+
+button {
+    display: block;
+    margin: 24px auto;
+    border: none;
+    background: hsl(340deg 100% 40%);
+    background: hsl(170, 100%, 40%);
+    padding: 12px 32px;
+    font-size: 1.375rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
