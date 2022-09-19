@@ -1,37 +1,66 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
-/**
- * Challenge: build the basic structure of our game
- *
- * 1. <h1> title at the top
- * 2. <textarea> for the box to type in
- *      (tip: React normalizes <textarea /> to be more like <input />,
- *      so it can be used as a self-closing element and uses the `value` property
- *      to set its contents)
- * 3. <h4> ti display the amount of time remaining
- * 4. <button> to start the game
- * 5. Another <h1> to display the word count
- */
-
 function App() {
-    const [count, setCount] = useState(0);
+    const [textareaInput, setTextAreaInput] = useState("");
+    const [timeRemaining, settimeRemaining] = useState(10);
+    const [gameStarted, setGameStarted] = useState(false);
+    const [points, setPoints] = useState(0);
+
+    const handleInputChange = (e) => {
+        setTextAreaInput(e.target.value);
+    };
+
+    const countWords = (wordsString) => {
+        const unfilteredInput = wordsString.trim().split(" ");
+        const filteredInput = unfilteredInput.filter((word) => word !== "");
+        return filteredInput.length;
+    };
+
+    const startNewGame = () => {
+        setGameStarted(true);
+        settimeRemaining(10);
+        setTextAreaInput("");
+        setPoints(0);
+    };
+
+    const endGame = () => {
+        setPoints(countWords(textareaInput));
+        setGameStarted(false);
+    };
+
+    useEffect(() => {
+        if (timeRemaining === 0) {
+            endGame();
+        } else if (gameStarted && timeRemaining > 0) {
+            setTimeout(
+                () =>
+                    settimeRemaining(
+                        (prevTimeRemaining) => prevTimeRemaining - 1
+                    ),
+                1000
+            );
+        }
+    }, [timeRemaining, gameStarted]);
 
     return (
         <div className="App">
             <h1>Speed Typer</h1>
             <textarea
                 className="typer-input"
-                // value=""
-                // placeholder=""
-                // onChange={}
-                // name=""
+                disabled={!gameStarted}
+                value={textareaInput}
+                placeholder="Start Typing..."
+                onChange={(event) => handleInputChange(event)}
+                // name="textInput"
             />
 
-            <h4>Time Remaining: </h4>
-            <button>Start Game</button>
+            <h4>Time Remaining: {timeRemaining}</h4>
+            <button disabled={gameStarted} onClick={() => startNewGame()}>
+                Start Game
+            </button>
 
-            <h1>Word Count: </h1>
+            <h1>Word Count: {points}</h1>
         </div>
     );
 }

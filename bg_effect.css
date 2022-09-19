@@ -14,7 +14,7 @@
     height: 100%;
     top: 0;
     left: 50%;
-    background-color: hsl(0, 0%, 8%);
+    background-color: hsla(0, 0%, 100%, 0%);
     overflow: hidden;
 }
 .line::after {
