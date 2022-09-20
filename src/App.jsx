@@ -1,61 +1,38 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import useGameLogic from "./useGameLogic";
 import "./App.css";
 
 function App() {
-    const [textareaInput, setTextAreaInput] = useState("");
-    const [timeRemaining, settimeRemaining] = useState(10);
-    const [gameStarted, setGameStarted] = useState(false);
-    const [points, setPoints] = useState(0);
-
-    const handleInputChange = (e) => {
-        setTextAreaInput(e.target.value);
-    };
-
-    const countWords = (wordsString) => {
-        const unfilteredInput = wordsString.trim().split(" ");
-        const filteredInput = unfilteredInput.filter((word) => word !== "");
-        return filteredInput.length;
-    };
-
-    const startNewGame = () => {
-        setGameStarted(true);
-        settimeRemaining(10);
-        setTextAreaInput("");
-        setPoints(0);
-    };
-
-    const endGame = () => {
-        setPoints(countWords(textareaInput));
-        setGameStarted(false);
-    };
-
-    useEffect(() => {
-        if (timeRemaining === 0) {
-            endGame();
-        } else if (gameStarted && timeRemaining > 0) {
-            setTimeout(
-                () =>
-                    settimeRemaining(
-                        (prevTimeRemaining) => prevTimeRemaining - 1
-                    ),
-                1000
-            );
-        }
-    }, [timeRemaining, gameStarted]);
+    const gameLogic = useGameLogic();
+    const {
+        inputRef,
+        gameStarted,
+        textInput,
+        handleInputChange,
+        timeRemaining,
+        startNewGame,
+        points,
+    } = gameLogic;
 
     return (
         <div className="App">
             <h1>Speed Typer</h1>
             <textarea
+                ref={inputRef}
                 className="typer-input"
                 disabled={!gameStarted}
-                value={textareaInput}
-                placeholder="Start Typing..."
+                value={textInput}
                 onChange={(event) => handleInputChange(event)}
-                // name="textInput"
+                name="textInput"
             />
 
-            <h4>Time Remaining: {timeRemaining}</h4>
+            {gameStarted ? (
+                <h4>
+                    Time Remaining: <b>{timeRemaining}</b>
+                </h4>
+            ) : (
+                <h4>&nbsp;</h4>
+            )}
             <button disabled={gameStarted} onClick={() => startNewGame()}>
                 Start Game
             </button>
