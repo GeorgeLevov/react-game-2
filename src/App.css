@@ -1,0 +1,58 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    padding: 32px;
+}
+
+h1 {
+    font-family: var(--ff-title-text);
+    font-size: 3.675rem;
+    user-select: none;
+}
+
+h4 {
+    font-size: 1.675rem;
+    letter-spacing: 2px;
+}
+
+textarea {
+    outline: none;
+    border: 2px solid #000;
+    resize: none;
+    margin: 0px auto;
+    width: 100%;
+    height: 400px;
+    background: hsl(320, 85%, 60%);
+    color: hsl(250, 100%, 60%);
+    padding: 16px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.typer-input {
+    margin: 16px auto;
+    margin-top: 32px;
+}
+.typer-input:disabled {
+    background-color: hsl(320, 50%, 30%);
+    color: hsl(320, 50%, 30%);
+    user-select: none;
+}
+
+button {
+    display: block;
+    margin: 24px auto;
+    border: none;
+    background: hsl(340deg 100% 40%);
+    background: hsl(180, 100%, 40%);
+    padding: 12px 32px;
+    font-size: 1.375rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}

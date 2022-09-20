@@ -1,13 +1,12 @@
 :root {
     font-size: 16px;
-    line-height: 24px;
     font-weight: 400;
 
     --ff-regular-text: "Alegreya Sans SC", sans-serif;
     --ff-title-text: "Major Mono Display", monospace;
     font-family: var(--ff-regular-text);
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background-color: hsl(0, 0%, 5%);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -41,10 +40,11 @@ body {
   Typographic tweaks!
   4. Add accessible line-height
   5. Improve text rendering
-*/
+	*/
 body {
+    width: 100%;
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+    position: relative;
 }
 /*
   6. Improve media defaults
@@ -84,4 +84,5 @@ h6 {
 #root,
 #__next {
     isolation: isolate;
+    height: inherit;
 }

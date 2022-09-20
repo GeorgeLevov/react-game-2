@@ -1,36 +1,43 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import useGameLogic from "./useGameLogic";
 import "./App.css";
 
-/**
- * Challenge: build the basic structure of our game
- *
- * 1. <h1> title at the top
- * 2. <textarea> for the box to type in
- *      (tip: React normalizes <textarea /> to be more like <input />,
- *      so it can be used as a self-closing element and uses the `value` property
- *      to set its contents)
- * 3. <h4> ti display the amount of time remaining
- * 4. <button> to start the game
- * 5. Another <h1> to display the word count
- */
-
 function App() {
-    const [count, setCount] = useState(0);
+    const gameLogic = useGameLogic();
+    const {
+        inputRef,
+        gameStarted,
+        textInput,
+        handleInputChange,
+        timeRemaining,
+        startNewGame,
+        points,
+    } = gameLogic;
 
     return (
         <div className="App">
-            <h1>Game Title</h1>
+            <h1>Speed Typer</h1>
             <textarea
-            // value=""
-            // placeholder=""
-            // onChange={}
-            // name=""
+                ref={inputRef}
+                className="typer-input"
+                disabled={!gameStarted}
+                value={textInput}
+                onChange={(event) => handleInputChange(event)}
+                name="textInput"
             />
 
-            <h4>Time Remaining: </h4>
-            <button>Start Game</button>
+            {gameStarted ? (
+                <h4>
+                    Time Remaining: <b>{timeRemaining}</b>
+                </h4>
+            ) : (
+                <h4>&nbsp;</h4>
+            )}
+            <button disabled={gameStarted} onClick={() => startNewGame()}>
+                Start Game
+            </button>
 
-            <h1>Word Count</h1>
+            <h1>Word Count: {points}</h1>
         </div>
     );
 }
